@@ -1,6 +1,6 @@
 export class Product {
     id: number;
-    vendor: string;
+    vendorName: string;
     partNumber: string;
     name: string;
     price: number;
@@ -8,10 +8,10 @@ export class Product {
     photoPath: String;
     
 
-    constructor(id: number = 0, vendor: string = "", partNumber: string = "", name: string = "", price: number = 0, unit: string = "", photoPath: string = "") {
+    constructor(id: number = 0, vendorName: string = "", partNumber: string = "", name: string = "", price: number = 0, unit: string = "", photoPath: string = "") {
 
         this.id = id;
-        this.vendor = vendor;
+        this.vendorName = vendorName;
         this.partNumber = partNumber;
         this.name = name;
         this.price = price;

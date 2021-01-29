@@ -24,6 +24,7 @@ export class VendorService {
 
   //create vendor
   create(vendor: Vendor): Observable<Vendor> {
+    console.log("Vendor create", vendor);
     return this.http.post(URL + '/', vendor) as Observable<Vendor>;
   }
   //update vendor

@@ -11,7 +11,7 @@ import { UserService } from 'src/app/service/user.service';
 export class UserCreateComponent implements OnInit {
   title = 'User Create';
   user: User = new User();
-  submitBtnTitle = 'Create';
+  submitBtnTitle = "Create";
 
   constructor(private userSvc: UserService, private router: Router) {}
 
@@ -23,7 +23,7 @@ export class UserCreateComponent implements OnInit {
         this.user = resp as User;
         console.log('User created', this.user);
         // forward to the user list component
-        this.router.navigateByUrl('/user-list');
+        this.router.navigateByUrl("/user-list");
       },
       (err) => {
         console.log(err);

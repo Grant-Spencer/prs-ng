@@ -8,6 +8,7 @@
 <table class="table table-sm table-striped">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Code</th>
       <th>Name</th>
       <th>Address</th>
@@ -16,10 +17,12 @@
       <th>Zip</th>
       <th>Phone Number</th>
       <th>Email</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let vendor of vendors">
+      <td>{{ vendor.id }}</td>
       <td>{{ vendor.code }}</td>
       <td>{{ vendor.name }}</td>
       <td>{{ vendor.address }}</td>
