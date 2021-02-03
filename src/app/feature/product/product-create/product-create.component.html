@@ -9,7 +9,9 @@
             Vendor:
         </td>
         <td>
-            <input [(ngModel)]="product.vendorName" class="rounded" type="text">
+              <select [(ngModel)]="product.vendor" class="rounded">
+              <option *ngFor='let vendor of vendors' [ngValue]='vendor'>{{vendor.name}}</option>
+          </select>
         </td>
       </tr>
       <tr>

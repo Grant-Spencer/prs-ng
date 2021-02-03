@@ -24,6 +24,7 @@ export class ProductService {
 
   //create product
   create(product: Product): Observable<Product> {
+    console.log("Product create", product);
     return this.http.post(URL + '/', product) as Observable<Product>;
   }
   //update product
