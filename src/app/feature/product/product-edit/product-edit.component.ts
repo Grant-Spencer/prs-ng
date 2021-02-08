@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/model/product.class';
+import { Vendor } from 'src/app/model/vendor.class';
 import { ProductService } from 'src/app/service/product.service';
+import { VendorService } from 'src/app/service/vendor.service';
 
 @Component({
   selector: 'app-product-edit',
@@ -12,9 +14,10 @@ export class ProductEditComponent implements OnInit {
   title = "Product Edit";
   product: Product = null;
   productId: number = 0;
-  submitBtnTitle = "Save";
+  vendors: Vendor[] = [];
+  submitBtnTitle = "Edit";
 
-  constructor(private productSvc: ProductService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private productSvc: ProductService, private router: Router, private route: ActivatedRoute, private vendorSvc: VendorService) { }
 
   ngOnInit(): void {
   // get the id from the url
@@ -34,6 +37,7 @@ export class ProductEditComponent implements OnInit {
   );
 }
 
+
 save() {
   // save the product to the DB
   this.productSvc.update(this.product).subscribe(
@@ -47,6 +51,20 @@ save() {
       console.log(err);
     }
   );
+  
+  // get vendors
+  this.vendorSvc.getAll().subscribe(
+    (resp) => {
+      this.vendors = resp as Vendor[];
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
 }
+compVendor(a: Vendor, b: Vendor): boolean {
+  return a && b && a.id === b.id;
+}
+
 
 }

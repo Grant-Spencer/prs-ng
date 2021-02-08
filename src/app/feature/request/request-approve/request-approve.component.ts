@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { RequestService } from 'src/app/service/request.service';
+import { SystemService } from 'src/app/service/system.service';
 
 @Component({
   selector: 'app-request-approve',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestApproveComponent implements OnInit {
 
-  constructor() { }
+  constructor(private requestSvc: RequestService, private sysSvc: SystemService, private router: Router) { }
 
   ngOnInit(): void {
   }

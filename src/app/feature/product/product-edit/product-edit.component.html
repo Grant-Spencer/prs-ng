@@ -1,6 +1,7 @@
 <app-menu></app-menu>
 <section class="heading">
     <span class='component-title'>[{{title}}]</span>
+    <span>&nbsp;<a routerLink="/product-list">Return to List</a></span>
   </section>
   <main *ngIf='product' class="single">
     <table class="table table-sm">
@@ -9,7 +10,10 @@
             Vendor:
         </td>
         <td>
-            <input [(ngModel)]="product.vendor.name" class="rounded" type="text">
+            <select [(ngModel)]="product.vendor" class="rounded" [compareWith]="compVendor">
+            <option *ngFor='let vendor of vendors' [ngValue]='vendor.name'>{{vendor.name}}
+            </option>
+            </select>
         </td>
       </tr>
       <tr>
@@ -22,7 +26,7 @@
       </tr>
       <tr>
         <td>
-            Name:
+            Product Name:
         </td>
         <td>
             <input [(ngModel)]="product.name" class="rounded" type="text">
@@ -42,20 +46,6 @@
         </td>
         <td>
             <input [(ngModel)]="product.unit" class="rounded" type="text">
-        </td>
-      </tr>
-      <tr>
-        <td>
-            Photo Path:
-        </td>
-        <td>
-            <input [(ngModel)]="product.photoPath" class="rounded" type="text">
-        </td>
-      </tr>
-      <tr>
-        <td>City:</td>
-        <td>
-            <input [(ngModel)]="product.city" class="rounded" type="text">
         </td>
       </tr>
     </table>

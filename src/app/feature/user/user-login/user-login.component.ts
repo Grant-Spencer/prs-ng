@@ -22,14 +22,16 @@ export class UserLoginComponent implements OnInit {
 
   }
   login() {
+    console.log("login user:", this.user);
     this.userSvc.login(this.user).subscribe(
       resp => {
-        if (resp == null) {
+        if (resp==null) {
           this.msg = "Invalid username / pwd combo.";
         } else {
+          this.user = resp as User;
           console.log("Successful login!", this.user);
           this.sysSvc.loggedInUser = this.user;
-          this.router.navigateByUrl('/movie-list');
+          this.router.navigateByUrl('/user-list');
         }
       },
       err => {

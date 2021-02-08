@@ -8,28 +8,27 @@
 <table class="table table-sm table-striped">
   <thead>
     <tr>
-      <th>User ID</th>
+      <th>ID</th>
+      <th>User</th>
       <th>Description</th>
       <th>Justification</th>
       <th>Date Needed</th>
-      <th>Delivery Mode</th>
       <th>Status</th>
       <th>Total</th>
       <th>Submitted Date</th>
-      <th>Reason For Rejection</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let request of requests">
-      <td>{{ request.userId }}</td>
+      <td>{{ request.Id }}</td>
+      <td>{{ request.user.userName}}</td>
       <td>{{ request.description }}</td>
       <td>{{ request.justification }}</td>
       <td>{{ request.dateNeeded }}</td>
-      <td>{{ request.deliveryMode }}</td>
       <td>{{ request.status }}</td>
       <td>{{ request.total }}</td>
       <td>{{ request.submittedDate }}</td>
-      <td>{{ request.reasonForRejection }}</td>
            <td>
         <a routerLink="/request-detail/{{ request.id }}"
           ><img

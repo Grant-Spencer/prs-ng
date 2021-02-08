@@ -1,18 +1,20 @@
+import { User } from "./user.class";
+
 export class Request {
     id: number;
-    userId: number;
+    user: User;
     description: string;
     justification: string;
-    dateNeeded: number;
+    dateNeeded: Date;
     deliveryMode: string;
     status: string;
     total: number;
-    submittedDate: number;
+    submittedDate: Date;
     reasonForRejection: string;
 
-    constructor(id: number = 0, userId: number = 0, description: string = "", justification: string = "", dateNeeded: number = 0, deliveryMode: string = "", status: string = "", total: number = 0, submittedDate: number = 0, reasonForRejection: string = "" ) {
+    constructor(id: number = 0, user: User = new User(), description: string = "", justification: string = "", dateNeeded: Date = null, deliveryMode: string = "", status: string = "", total: number = 0, submittedDate: Date = null, reasonForRejection: string = "" ) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
         this.description = description;
         this.justification = justification;
         this.dateNeeded = dateNeeded;
