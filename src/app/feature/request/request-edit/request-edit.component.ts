@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Request } from 'src/app/model/request.class';
+import { User } from 'src/app/model/user.class';
 import { RequestService } from 'src/app/service/request.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-request-edit',
@@ -12,9 +14,10 @@ export class RequestEditComponent implements OnInit {
   title = "Request Edit";
   request: Request = null;
   requestId: number = 0;
-  submitBtnTitle = "Save";
+  users: User[] = [];
+  submitBtnTitle = "Edit";
 
-  constructor(private requestSvc: RequestService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private requestSvc: RequestService, private userSvc: UserService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
   // get the id from the url
@@ -47,6 +50,19 @@ save() {
       console.log(err);
     }
   );
+  // get users
+  this.userSvc.getAll().subscribe(
+    (resp) => {
+      this.users = resp as User[];
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
+compUser(a: User, b: User): boolean {
+  return a && b && a.id === b.id;
+
 }
 
 }

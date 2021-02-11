@@ -1,16 +1,19 @@
 <app-menu></app-menu>
 <section class="heading">
     <span class='component-title'>[{{title}}]</span>
+    <span>&nbsp;<a routerLink="/request-list">Return to List</a></span>
   </section>
   <main *ngIf='request' class="single">
     <table class="table table-sm">
-      <tr>
+        <tr>
         <td>
             User ID:
         </td>
         <td>
-            <input [(ngModel)]="request.userId" class="rounded" type="text">
-        </td>
+          <select [(ngModel)]="request.userId" class="rounded">
+          <option *ngFor='let user of users' [ngValue]='user'>{{user.ID}}</option>
+      </select>
+    </td>
       </tr>
       <tr>
         <td>
