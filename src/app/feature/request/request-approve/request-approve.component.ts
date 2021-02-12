@@ -29,8 +29,8 @@ export class RequestApproveComponent implements OnInit {
   ngOnInit(): void {
     // get the id from the url
     this.route.params.subscribe((parms) => {
-      if (parms['requestId'] && parms['GetById']) {
-        this.lineItemSvc.delete(parms['GetById']).subscribe((resp) => {
+      if (parms['requestId'] && parms['getById']) {
+        this.lineItemSvc.delete(parms['getById']).subscribe((resp) => {
           this.router.navigateByUrl('/request-lines/' + parms['requestId']);
         });
       }
@@ -49,9 +49,9 @@ export class RequestApproveComponent implements OnInit {
     );
 
     // get lineitems by request ID
-    this.lineItemSvc.getLineItemByRequestId(this.requestId).subscribe(
+    this.lineItemSvc.getlineItemByRequestId(this.requestId).subscribe(
       (resp) => {
-        console.log('li resp: ', resp);
+        console.log('line item resp: ', resp);
         this.lineItems = resp as LineItem[];
       },
       (err) => {
@@ -60,15 +60,24 @@ export class RequestApproveComponent implements OnInit {
     );
   }
 
+  // approve
   approveRequest() {
-    this.requestSvc.approveRequest(this.request).subscribe((resp) => {
-      this.router.navigateByUrl('/request-review');
-    });
+    this.requestSvc.approveRequest(this.request).subscribe(
+      resp => {
+        this.request = resp as Request;
+        this.router.navigateByUrl("/request-review");
+      }
+    );
   }
 
+  // reject
   rejectRequest() {
-    this.requestSvc.rejectRequest(this.request).subscribe((resp) => {
-      this.router.navigateByUrl('/request-review');
+    this.requestSvc.rejectRequest(this.request).subscribe(
+      resp => {
+        this.request = resp as Request;
+        // forward to request review
+        this.router.navigateByUrl("/request-review");
+
     });
   }
 }

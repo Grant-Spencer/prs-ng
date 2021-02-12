@@ -44,7 +44,7 @@ export class RequestLinesComponent implements OnInit {
     );
 
     // get lineitems by request ID
-    this.lineItemSvc.getLineItemByRequestId(this.requestID).subscribe(
+    this.lineItemSvc.getlineItemByRequestId(this.requestID).subscribe(
       resp => {
         this.lineItems = resp as LineItem[];
         console.log('LineItems', this.lineItems);
