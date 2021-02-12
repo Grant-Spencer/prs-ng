@@ -35,6 +35,15 @@ export class ProductEditComponent implements OnInit {
       console.log(err);
     }
   );
+  // get vendors
+  this.vendorSvc.getAll().subscribe(
+    (resp) => {
+      this.vendors = resp as Vendor[];
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
 }
 
 
@@ -52,15 +61,7 @@ save() {
     }
   );
   
-  // get vendors
-  this.vendorSvc.getAll().subscribe(
-    (resp) => {
-      this.vendors = resp as Vendor[];
-    },
-    (err) => {
-      console.log(err);
-    }
-  );
+
 }
 compVendor(a: Vendor, b: Vendor): boolean {
   return a && b && a.id === b.id;

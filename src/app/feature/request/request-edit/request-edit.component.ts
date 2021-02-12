@@ -35,6 +35,15 @@ export class RequestEditComponent implements OnInit {
       console.log(err);
     }
   );
+  // get users
+  this.userSvc.getAll().subscribe(
+    (resp) => {
+      this.users = resp as User[];
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
 }
 
 save() {
@@ -50,15 +59,7 @@ save() {
       console.log(err);
     }
   );
-  // get users
-  this.userSvc.getAll().subscribe(
-    (resp) => {
-      this.users = resp as User[];
-    },
-    (err) => {
-      console.log(err);
-    }
-  );
+
 }
 compUser(a: User, b: User): boolean {
   return a && b && a.id === b.id;

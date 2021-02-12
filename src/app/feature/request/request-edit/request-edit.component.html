@@ -10,8 +10,8 @@
             User ID:
         </td>
         <td>
-          <select [(ngModel)]="request.userId" class="rounded">
-          <option *ngFor='let user of users' [ngValue]='user'>{{user.ID}}</option>
+          <select [(ngModel)]="request.user" class="rounded" [compareWith]="compVendor">
+            <option *ngFor='let user of users' [ngValue]='user'>{{user.id}}
       </select>
     </td>
       </tr>

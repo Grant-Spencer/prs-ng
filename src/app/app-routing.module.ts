@@ -10,6 +10,7 @@ import { ProductListComponent } from './feature/product/product-list/product-lis
 import { RequestApproveComponent } from './feature/request/request-approve/request-approve.component';
 import { RequestCreateComponent } from './feature/request/request-create/request-create.component';
 import { RequestEditComponent } from './feature/request/request-edit/request-edit.component';
+import { RequestDetailComponent } from './feature/request/request-detail/request-detail.component';
 import { RequestLinesComponent } from './feature/request/request-lines/request-lines.component';
 import { RequestListComponent } from './feature/request/request-list/request-list.component';
 import { RequestReviewComponent } from './feature/request/request-review/request-review.component';
@@ -38,13 +39,14 @@ const routes: Routes = [
   { path: 'product-create', component: ProductCreateComponent },
   { path: 'product-edit/:id', component: ProductEditComponent },
   { path: 'product-detail/:id', component: ProductDetailComponent },
-  { path: 'request-detail/:id', component: VendorDetailComponent },
+  { path: 'request-detail/:id', component: RequestDetailComponent },
   { path: 'request-list', component: RequestListComponent },
   { path: 'request-edit/:id', component: RequestEditComponent },
   { path: 'request-review', component: RequestReviewComponent },
   { path: 'request-create', component: RequestCreateComponent },
   { path: 'request-approve', component: RequestApproveComponent },
   { path: 'request-lines/:id', component: RequestLinesComponent },
+  { path: 'request-review', component: RequestReviewComponent },
   { path: 'line-item-edit/:id', component: LineItemEditComponent },
   { path: 'line-item-create/:id', component: LineItemCreateComponent },
   { path: '**', component: NoComponentDefinedComponent }

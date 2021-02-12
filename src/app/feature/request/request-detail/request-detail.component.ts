@@ -14,8 +14,8 @@ export class RequestDetailComponent implements OnInit {
   requestId: number = 0;
 
   constructor(private requestSvc: RequestService,
-    private router: Router,
-    private route: ActivatedRoute) { }
+                      private router: Router,
+                      private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     //get the detail from the URL
