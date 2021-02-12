@@ -29,9 +29,9 @@ export class RequestApproveComponent implements OnInit {
   ngOnInit(): void {
     // get the id from the url
     this.route.params.subscribe((parms) => {
-      if (parms['rid'] && parms['liid']) {
-        this.lineItemSvc.delete(parms['liid']).subscribe((resp) => {
-          this.router.navigateByUrl('/request-lines/' + parms['rid']);
+      if (parms['requestId'] && parms['GetById']) {
+        this.lineItemSvc.delete(parms['GetById']).subscribe((resp) => {
+          this.router.navigateByUrl('/request-lines/' + parms['requestId']);
         });
       }
       if (parms['id']) {
