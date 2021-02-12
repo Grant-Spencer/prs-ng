@@ -53,21 +53,21 @@
       <td>{{lineItem.product.price | currency}}</td>
       <td>{{lineItem.quantity * lineItem.product.price | currency}}</td>
       <td>
-        <a routerLink="/line-item-edit/{{lineItem.id }}">
+        <!-- <a routerLink="/line-item-edit/{{lineItem.id }}">
           <img
             width="20"
             height="20"
             src="assets/pencil-icon.png"
             title="Line Item Edit"
           />
-        </a>
+        </a> -->
         |
         <a routerLink="/request-lines/{{ request.id }}/{{ lineItem.id }}">
           <img
             width="20"
             height="20"
             src="assets/delete.jpg"
-            title="Line Item Delete"
+            title="Line Item Delete" (click)="delete(lineItem.id)"
           />
         </a>
       </td>

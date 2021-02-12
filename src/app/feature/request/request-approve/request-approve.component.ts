@@ -49,7 +49,7 @@ export class RequestApproveComponent implements OnInit {
     );
 
     // get lineitems by request ID
-    this.lineItemSvc.getLineItemsByRequest(this.requestId).subscribe(
+    this.lineItemSvc.getLineItemByRequestId(this.requestId).subscribe(
       (resp) => {
         console.log('li resp: ', resp);
         this.lineItems = resp as LineItem[];

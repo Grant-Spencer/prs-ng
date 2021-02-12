@@ -6,6 +6,7 @@ import { Request } from 'src/app/model/request.class';
 import { ProductService } from 'src/app/service/product.service';
 import { RequestService } from 'src/app/service/request.service';
 import { LineItemService } from 'src/app/service/line-item.service';
+import { SystemService } from 'src/app/service/system.service';
 
 @Component({
   selector: 'app-line-item-create',
@@ -20,7 +21,7 @@ export class LineItemCreateComponent implements OnInit {
   products: Product[] = [];
   requestId: number = 0;
 
-  constructor(private requestSvc: RequestService, private productSvc: ProductService, private router: Router, private route: ActivatedRoute, private lineItemSvc: LineItemService) {}
+  constructor(private requestSvc: RequestService, private productSvc: ProductService, private router: Router, private route: ActivatedRoute, private lineItemSvc: LineItemService, private sysSvc: SystemService) {}
 
   ngOnInit(): void {
     // get id
@@ -35,6 +36,8 @@ export class LineItemCreateComponent implements OnInit {
         console.log(err);
       }
     );
+
+      this.request.user = this.sysSvc.loggedInUser;
 
     // get list of products because of foreign key constraint
     this.productSvc.getAll().subscribe(
@@ -53,6 +56,7 @@ export class LineItemCreateComponent implements OnInit {
     this.lineItemSvc.create(this.lineItem).subscribe(
       (resp) => {
         this.lineItem = resp as LineItem;
+        console.log('line item created', this.lineItem);
         // forward to the line item list component
         this.router.navigateByUrl('/request-lines/' + this.request.id);
       },
