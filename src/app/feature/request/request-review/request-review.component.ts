@@ -1,30 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { Request } from 'src/app/model/request.class';
 import { RequestService } from 'src/app/service/request.service';
 import { SystemService } from 'src/app/service/system.service';
+import { Request } from 'src/app/model/request.class';
 
 @Component({
   selector: 'app-request-review',
   templateUrl: './request-review.component.html',
-  styleUrls: ['./request-review.component.css'],
+  styleUrls: ['./request-review.component.css']
 })
 export class RequestReviewComponent implements OnInit {
-  title = 'PurchaseRequest Review';
+  title = "PurchaseRequest Review";
   requests: Request[] = [];
-  requestId: number = 0;
+  requestID: number = 0;
 
-  constructor(
-    private requestSvc: RequestService,
-    private systemSvc: SystemService
-  ) {}
+  constructor(private requestSvc: RequestService, private sysSvc: SystemService) { }
 
-   ngOnInit(): void {
-    // populate list of requests by users that are not logged in
-    this.requestSvc.getRequestsInReview(this.systemSvc.loggedInUser.id).subscribe(
-      (resp) => {
+  ngOnInit(): void {
+    this.sysSvc.checklogin();
+    console.log("Calling review request");
+    this.requestSvc.reviewRequest(this.sysSvc.loggedInUser.id).subscribe(
+      resp => {
         this.requests = resp as Request[];
-          },
-      (err) => {
+        console.log("Requests for review: ",this.requests);
+      },
+      err => {
         console.log(err);
       }
     );

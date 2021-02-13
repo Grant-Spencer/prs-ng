@@ -30,7 +30,18 @@ export class RequestLinesComponent implements OnInit {
     this.route.params.subscribe(
       parms => {
         this.requestID = parms['id'];
-      });
+        // get lineitems by request ID
+        this.lineItemSvc.getlineItemByRequestId(this.requestID).subscribe(
+          resp => {
+            this.lineItems = resp as LineItem[];
+            console.log('LineItems', this.lineItems);
+          },
+          err => {
+            console.log("error getting line items for request id", err);
+          }
+        );
+      }
+    );
 
     // get request by id
     this.requestSvc.getById(this.requestID).subscribe(
@@ -43,16 +54,7 @@ export class RequestLinesComponent implements OnInit {
       }
     );
 
-    // get lineitems by request ID
-    this.lineItemSvc.getlineItemByRequestId(this.requestID).subscribe(
-      resp => {
-        this.lineItems = resp as LineItem[];
-        console.log('LineItems', this.lineItems);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+
   }
 
   delete(lineItemID: number) {
@@ -61,7 +63,7 @@ export class RequestLinesComponent implements OnInit {
       resp => {
         this.lineItem = resp as LineItem;
         // reload request lines page
-        this.router.navigateByUrl("/request-lines/"+this.requestID);
+        this.router.navigateByUrl("/request-lines/" + this.requestID);
       },
       err => {
         console.log(err);

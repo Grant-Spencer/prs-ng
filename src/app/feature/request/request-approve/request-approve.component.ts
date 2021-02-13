@@ -4,57 +4,50 @@ import { LineItem } from 'src/app/model/line-item.class';
 import { Request } from 'src/app/model/request.class';
 import { LineItemService } from 'src/app/service/line-item.service';
 import { RequestService } from 'src/app/service/request.service';
+import { SystemService } from 'src/app/service/system.service';
 
 @Component({
   selector: 'app-request-approve',
   templateUrl: './request-approve.component.html',
-  styleUrls: ['./request-approve.component.css'],
+  styleUrls: ['./request-approve.component.css']
 })
 export class RequestApproveComponent implements OnInit {
-  requestTitle = 'PurchaseRequest Line Items';
+  requestTitle = "PurchaseRequest Line Items";
   request: Request = new Request();
-  requestId: number = 0;
-  linesTitle = 'Lines';
+  requestID: number = 0;
+  linesTitle = 'Line Items';
   lineItems: LineItem[] = [];
-  approveBtnTitle = 'Approve';
-  rejectBtnTitle = 'Reject';
+  approveBtn = "Approve";
+  rejectBtn = "Reject";
 
-  constructor(
-    private requestSvc: RequestService,
-    private lineItemSvc: LineItemService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private requestSvc: RequestService, private lineItemSvc: LineItemService, 
+    private router: Router, private route: ActivatedRoute, private sysSvc: SystemService) { }
 
   ngOnInit(): void {
-    // get the id from the url
-    this.route.params.subscribe((parms) => {
-      if (parms['requestId'] && parms['getById']) {
-        this.lineItemSvc.delete(parms['getById']).subscribe((resp) => {
-          this.router.navigateByUrl('/request-lines/' + parms['requestId']);
-        });
-      }
-      if (parms['id']) {
-        this.requestId = parms['id'];
-      }
-    });
+    this.sysSvc.checklogin();
+
+    // get the id from url
+    this.route.params.subscribe(
+      parms => {
+        this.requestID = parms['id'];
+      });
+
     // get request by id
-    this.requestSvc.getById(this.requestId).subscribe(
-      (resp) => {
+    this.requestSvc.getById(this.requestID).subscribe(
+      resp => {
         this.request = resp as Request;
       },
-      (err) => {
+      err => {
         console.log(err);
       }
     );
 
-    // get lineitems by request ID
-    this.lineItemSvc.getlineItemByRequestId(this.requestId).subscribe(
-      (resp) => {
-        console.log('line item resp: ', resp);
+    // get line items by request id
+    this.lineItemSvc.getlineItemByRequestId(this.requestID).subscribe(
+      resp => {
         this.lineItems = resp as LineItem[];
       },
-      (err) => {
+      err => {
         console.log(err);
       }
     );
@@ -77,7 +70,7 @@ export class RequestApproveComponent implements OnInit {
         this.request = resp as Request;
         // forward to request review
         this.router.navigateByUrl("/request-review");
-
-    });
+      }
+    );
   }
 }
